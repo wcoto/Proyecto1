@@ -1,4 +1,4 @@
-module ALUTest
+module ALU
 
 #(
 	// Parameter Declarations

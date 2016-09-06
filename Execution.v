@@ -2,7 +2,7 @@ module Execution
 
 #(
 	// Parameter Declarations
-	parameter BITS_OPCODE = 5,
+	parameter BITS_OPCODE = 4,
 	parameter BITS_ARRAY  = 64,
 	parameter BITS_DATA   = 8
 )(
