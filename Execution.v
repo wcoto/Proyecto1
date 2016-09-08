@@ -18,14 +18,7 @@ module Execution
 );
 
 	// Conectors
-	wire [BITS_DATA-1:0] alu1;
-	wire [BITS_DATA-1:0] alu2;
-	wire [BITS_DATA-1:0] alu3;
-	wire [BITS_DATA-1:0] alu4;
-	wire [BITS_DATA-1:0] alu5;
-	wire [BITS_DATA-1:0] alu6;
-	wire [BITS_DATA-1:0] alu7;
-	wire [BITS_DATA-1:0] alu8;
+	wire [BITS_DATA-1:0] alu1, alu2, alu3, alu4, alu5, alu6, alu7, alu8;
 	wire carry1, carry2, carry3, carry4, carry5, carry6, carry7, carry8;
 
 	// ALU Instantiation
