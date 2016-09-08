@@ -2,33 +2,44 @@ module ALU
 
 #(
 	// Parameter Declarations
-	parameter BITS = 8,
+	parameter BITS  = 8,
 	parameter ALUOP = 4
 )(
 	// Input Ports
-	input [ALUOP-1:0] aluFunction,
-	input [BITS-1:0]   vectorA,
-	input [BITS-1:0]   vectorB,
+	input [ALUOP-1:0]     aluFunction,
+	input [BITS -1:0]     vectorA,
+	input [BITS -1:0]     vectorB,
+	input                 inputCarry,
 
 	// Output Ports
-	//output zero,
-	//output overflow,
+	output                overflow,
+	output                zero,
+	output                outputCarry,
 	output reg [BITS-1:0] aluResult
 );
 
-	reg [BITS-1:0] aux;
-	integer i;
+	// Registro con una posición extra que verifica si hubo carry
+	reg [BITS:0] auxCarry;
 
 			always@(*)
 				begin
 					case(aluFunction)
 						4'd1:
 							begin : Add
+								auxCarry = vectorA + vectorB;
 								aluResult = vectorA + vectorB;
 							end
 						4'd2:
 							begin : Subtract
-								aluResult = vectorA - vectorB;
+								if(inputCarry)
+									begin
+										auxCarry = {{1'b1},{vectorA}};
+									end
+								else
+									begin
+										auxCarry = vectorA;
+									end
+								aluResult = auxCarry - vectorB;
 							end
 						4'd3:
 							begin : XOR
@@ -146,12 +157,12 @@ module ALU
 							end
 					endcase
 				end
-			    
-         
-/*
+				
+			assign outputCarry = ((aluFunction == 4'd1) & (auxCarry[BITS] == 1'b1));		    
+			
 			assign overflow = ((vectorA[BITS-1] == 1'b1 & vectorB[BITS-1] == 1'b1 & aluResult[BITS-1] == 1'b0)
-								|(vectorA[BITS-1] == 1'b0 & vectorB[BITS-1] == 1'b0 & aluResult[BITS-1] == 1'b1)) ? 1:0;
+   								|(vectorA[BITS-1] == 1'b0 & vectorB[BITS-1] == 1'b0 & aluResult[BITS-1] == 1'b1)) ? 1:0;
 			assign zero     = (aluResult == 0) ? 1: 0;
-*/
+
 
 endmodule
