@@ -38,13 +38,13 @@ module Execution
 		.outputCarry(carry2),
 		.aluResult(alu2));
 		
-		ALU inst_ALU4(
-		.aluFunction(opCode),
-		.vectorA(arrayA[23:16]),
-		.vectorB(arrayB[23:16]),
-		.inputCarry(auxCarry[5]),
-		.outputCarry(carry3),
-		.aluResult(alu3));
+	ALU inst_ALU4(
+	.aluFunction(opCode),
+	.vectorA(arrayA[23:16]),
+	.vectorB(arrayB[23:16]),
+	.inputCarry(auxCarry[5]),
+	.outputCarry(carry3),
+	.aluResult(alu3));
 
 	ALU inst_ALU3(
 		.aluFunction(opCode),

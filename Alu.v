@@ -72,82 +72,74 @@ module ALU
 						4'd10:
 							begin : Rotate_Right
 								case(vectorB)
-									5'd0:
-										begin
-											aluResult = vectorA;
-										end
 									5'd1:
-										begin
+										begin : Rotacion_1Bit
 											aluResult = {{vectorA[0]},{vectorA[7:1]}};
 										end
 									5'd2:
-										begin
+										begin : Rotacion_2Bit
 											aluResult = {{vectorA[1:0]},{vectorA[7:2]}};
 										end
 									5'd3:
-										begin
+										begin : Rotacion_3Bit
 											aluResult = {{vectorA[2:0]},{vectorA[7:3]}};
 										end
 									5'd4:
-										begin
+										begin : Rotacion_4Bit
 											aluResult = {{vectorA[3:0]},{vectorA[7:4]}};
 										end
 									5'd5:
-										begin
+										begin : Rotacion_5Bit
 											aluResult = {{vectorA[4:0]},{vectorA[7:5]}};
 										end
 									5'd6:
-										begin
+										begin : Rotacion_6Bit
 											aluResult = {{vectorA[5:0]},{vectorA[7:6]}};
 										end
 									5'd7:
-										begin
+										begin : Rotacion_7Bit
 											aluResult = {{vectorA[6:0]},{vectorA[7]}};
 										end
-									default:
-										begin
-											aluResult = 8'd0;
+									default :
+										begin : Rotacion_0Bit
+											aluResult = vectorA;
 										end
 								endcase  
 							end
 						4'd11:
 							begin : Rotate_Left
 								case(vectorB)
-									5'd0:
-										begin
-											aluResult = vectorA;
-										end
 									5'd1:
-										begin
+										begin : Rotacion_1Bit
 											aluResult = {{vectorA[7:1]},{vectorA[0]}};
 										end
 									5'd2:
-										begin
+										begin : Rotacion_2Bit
 											aluResult = {{vectorA[7:2]},{vectorA[1:0]}};
 										end
 									5'd3:
-										begin
+										begin : Rotacion_3Bit
 											aluResult = {{vectorA[7:3]},{vectorA[2:0]}};
 										end
 									5'd4:
-										begin
+										begin : Rotacion_4Bit
 											aluResult = {{vectorA[7:4]},{vectorA[3:0]}};
 										end
 									5'd5:
-										begin
+										begin : Rotacion_5Bit
 											aluResult = {{vectorA[7:5]},{vectorA[4:0]}};
 										end
 									5'd6:
-										begin
+										begin : Rotacion_6Bit
 											aluResult = {{vectorA[7:6]},{vectorA[5:0]}};
 										end
 									5'd7:
-										begin
+										begin : Rotacion_7Bit
 											aluResult = {{vectorA[7]},{vectorA[6:0]}};
 										end
 									default:
-										begin
-											aluResult = 8'd0;
+										begin : Rotacion_0Bit
+											aluResult = vectorA;
 										end
 								endcase  
 							end
