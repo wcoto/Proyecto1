@@ -9,37 +9,21 @@ module ALU
 	input [ALUOP-1:0]     aluFunction,
 	input [BITS -1:0]     vectorA,
 	input [BITS -1:0]     vectorB,
-	input                 inputCarry,
 
 	// Output Ports
-	output                overflow,
-	output                zero,
-	output                outputCarry,
 	output reg [BITS-1:0] aluResult
 );
-
-	// Registro con una posición extra que verifica si hubo carry
-	reg [BITS:0] auxCarry;
 
 			always@(*)
 				begin
 					case(aluFunction)
 						4'd1:
 							begin : Add
-								auxCarry = vectorA + vectorB;
 								aluResult = vectorA + vectorB;
 							end
 						4'd2:
 							begin : Subtract
-								if(inputCarry)
-									begin
-										auxCarry = {{1'b1},{vectorA}};
-									end
-								else
-									begin
-										auxCarry = vectorA;
-									end
-								aluResult = auxCarry - vectorB;
+								aluResult = vectorA - vectorB;
 							end
 						4'd3:
 							begin : XOR
@@ -54,22 +38,14 @@ module ALU
 								aluResult = vectorA || vectorB;
 							end
 						4'd6:
-							begin : Move_Scalar
-								aluResult = 8'hFF;
-							end
-						4'd7:
-							begin : Move_Scalar_to_Register
-								aluResult = 8'hFF;
-							end
-						4'd8:
 							begin : Shift_Left
 								aluResult = vectorA << vectorB;
 							end
-						4'd9: 
+						4'd7:
 							begin : Shift_Right
 								aluResult = vectorA >> vectorB;
 							end
-						4'd10:
+						4'd8:
 							begin : Rotate_Right
 								case(vectorB)
 									5'd1:
@@ -104,9 +80,9 @@ module ALU
 										begin : Rotacion_0Bit
 											aluResult = vectorA;
 										end
-								endcase  
+								endcase
 							end
-						4'd11:
+						4'd9:
 							begin : Rotate_Left
 								case(vectorB)
 									5'd1:
@@ -141,7 +117,7 @@ module ALU
 										begin : Rotacion_0Bit
 											aluResult = vectorA;
 										end
-								endcase  
+								endcase
 							end
 						default:
 							begin : No_function
@@ -149,12 +125,11 @@ module ALU
 							end
 					endcase
 				end
-				
-			assign outputCarry = ((aluFunction == 4'd1) & (auxCarry[BITS] == 1'b1));		    
-			
-			assign overflow = ((vectorA[BITS-1] == 1'b1 & vectorB[BITS-1] == 1'b1 & aluResult[BITS-1] == 1'b0)
-   								|(vectorA[BITS-1] == 1'b0 & vectorB[BITS-1] == 1'b0 & aluResult[BITS-1] == 1'b1)) ? 1:0;
-			assign zero     = (aluResult == 0) ? 1: 0;
+
+//			assign outputCarry = ((aluFunction == 4'd1) & (auxCarry[BITS] == 1'b1));
+//			assign overflow = ((vectorA[BITS-1] == 1'b1 & vectorB[BITS-1] == 1'b1 & aluResult[BITS-1] == 1'b0)
+//   								|(vectorA[BITS-1] == 1'b0 & vectorB[BITS-1] == 1'b0 & aluResult[BITS-1] == 1'b1)) ? 1:0;
+//			assign zero     = (aluResult == 32'd0) ? 1: 0;
 
 
 endmodule
