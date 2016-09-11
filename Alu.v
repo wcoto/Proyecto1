@@ -6,7 +6,7 @@ module ALU
 	parameter ALUOP = 4
 )(
 	// Input Ports
-	input [ALUOP-1:0]     aluFunction,
+	input [ALUOP-1:0]     aluOP,
 	input [BITS -1:0]     vectorA,
 	input [BITS -1:0]     vectorB,
 
@@ -16,7 +16,7 @@ module ALU
 
 			always@(*)
 				begin
-					case(aluFunction)	
+					case(aluOP)
 						4'd1:
 							begin : Move_Scalar_Vector
 								aluResult = vectorA + 8'b0;
@@ -130,7 +130,7 @@ module ALU
 					endcase
 				end
 
-//			assign outputCarry = ((aluFunction == 4'd1) & (auxCarry[BITS] == 1'b1));
+//			assign outputCarry = ((aluOP == 4'd1) & (auxCarry[BITS] == 1'b1));
 //			assign overflow = ((vectorA[BITS-1] == 1'b1 & vectorB[BITS-1] == 1'b1 & aluResult[BITS-1] == 1'b0)
 //   								|(vectorA[BITS-1] == 1'b0 & vectorB[BITS-1] == 1'b0 & aluResult[BITS-1] == 1'b1)) ? 1:0;
 //			assign zero     = (aluResult == 32'd0) ? 1: 0;
