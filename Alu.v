@@ -16,36 +16,40 @@ module ALU
 
 			always@(*)
 				begin
-					case(aluFunction)
+					case(aluFunction)	
 						4'd1:
+							begin : Move_Scalar_Vector
+								aluResult = vectorA + 64'b0;
+							end
+						4'd2:
 							begin : Add
 								aluResult = vectorA + vectorB;
 							end
-						4'd2:
+						4'd3:
 							begin : Subtract
 								aluResult = vectorA - vectorB;
 							end
-						4'd3:
+						4'd4:
 							begin : XOR
 								aluResult = vectorA ^ vectorB;
 							end
-						4'd4:
+						4'd5:
 							begin : And
 								aluResult = vectorA & vectorB;
 							end
-						4'd5:
+						4'd6:
 							begin : Or
 								aluResult = vectorA | vectorB;
 							end
-						4'd6:
+						4'd7:
 							begin : Shift_Left
 								aluResult = vectorA << vectorB;
 							end
-						4'd7:
+						4'd8:
 							begin : Shift_Right
 								aluResult = vectorA >> vectorB;
 							end
-						4'd8:
+						4'd9:
 							begin : Rotate_Left
 								case(vectorB)
 									5'd1:
@@ -82,7 +86,7 @@ module ALU
 										end
 								endcase
 							end
-						4'd9:
+						4'd10:
 							begin : Rotate_Right
 								case(vectorB)
 									5'd1:
