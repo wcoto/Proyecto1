@@ -19,7 +19,7 @@ module ALU
 					case(aluFunction)	
 						4'd1:
 							begin : Move_Scalar_Vector
-								aluResult = vectorA + 64'b0;
+								aluResult = vectorA + 8'b0;
 							end
 						4'd2:
 							begin : Add
