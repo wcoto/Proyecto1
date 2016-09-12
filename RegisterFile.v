@@ -27,7 +27,7 @@ always @(negedge clk)
 			begin
 				for(i=0; i < REGISTER_NUMBER; i = i + 1)
 					begin
-						RegisterFile[i]= 'dx;
+						RegisterFile[i]= 64'bx;
 					end
 			end
 		else if (write_enable)
@@ -39,7 +39,7 @@ always @(negedge clk)
 		
 ////*********** Reads data at clock's positive edge **************
 
-always @(posedge clk)
+always @(*)
 	  begin
 			data_out_1 = RegisterFile[src_addr_1];
 			data_out_2 = RegisterFile[src_addr_2];

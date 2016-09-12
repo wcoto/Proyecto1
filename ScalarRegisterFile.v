@@ -39,7 +39,7 @@ always @(negedge clk)
 		
 ////*********** Reads data at clock's positive edge **************
 
-always @(posedge clk)
+always @(*)
 	  begin
 			data_out_1 = ScalarRegisterFile[src_addr_1];
 			data_out_2 = ScalarRegisterFile[src_addr_2];
