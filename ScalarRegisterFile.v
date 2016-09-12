@@ -27,12 +27,12 @@ always @(negedge clk)
 			begin
 				for(i=0; i < REGISTER_NUMBER; i = i + 1)
 					begin
-						RegisterFile[i]= 32'bx;
+						ScalarRegisterFile[i]= 32'bx;
 					end
 			end
 		else if (write_enable)
 			  begin
-					RegisterFile[dest_addr] = write_data;
+					ScalarRegisterFile[dest_addr] = write_data;
 			  end
 	end
 		
@@ -41,8 +41,8 @@ always @(negedge clk)
 
 always @(posedge clk)
 	  begin
-			data_out_1 = RegisterFile[src_addr_1];
-			data_out_2 = RegisterFile[src_addr_2];
+			data_out_1 = ScalarRegisterFile[src_addr_1];
+			data_out_2 = ScalarRegisterFile[src_addr_2];
 	  end
 	  
 endmodule
