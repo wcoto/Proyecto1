@@ -128,7 +128,7 @@ module ALU
 								aluResult = 8'h0;
 							end
 					endcase
-				end
+				end   
 
 //			assign outputCarry = ((aluOP == 4'd1) & (auxCarry[BITS] == 1'b1));
 //			assign overflow = ((vectorA[BITS-1] == 1'b1 & vectorB[BITS-1] == 1'b1 & aluResult[BITS-1] == 1'b0)
