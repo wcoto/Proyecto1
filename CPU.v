@@ -7,6 +7,7 @@ module CPU
 (
 	// Input Ports
 	input clk,
+	input reset,
 
 	// Output Ports
 	output [RGB_SIZE-1:0] vgaRed,
@@ -31,8 +32,8 @@ module CPU
 		.oVGA_V_SYNC(vSync),
 		.oVGA_SYNC(sync),
 		.oVGA_BLANK(blanck),
-		.iCLK(),
-		.iRST_N(),
+		.iCLK(clk),
+		.iRST_N(reset),
 		.iZOOM_MODE_SW());
 
 endmodule
