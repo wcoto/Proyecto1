@@ -56,8 +56,7 @@ module VGA_Controller(
 	output reg oVGA_BLANK,
 	//	Control Signal
 	input iCLK,
-	input iRST_N,
-	input ZOOM_MODE_SW
+	input iRST_N
 	);
 
 //  RGB data bus
@@ -75,7 +74,7 @@ parameter V_SYNC_CYC	  = 2;
 parameter V_SYNC_BACK  = 33;
 parameter V_SYNC_ACT	  = 480;
 parameter V_SYNC_FRONT = 10;
-parameter V_SYNC_TOTAL = 525;
+parameter V_SYNC_TOTAL = 25;
 
 //	Start Offset
 parameter X_START	= H_SYNC_CYC + H_SYNC_BACK;

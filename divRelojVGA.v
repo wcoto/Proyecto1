@@ -1,7 +1,7 @@
 module divRelojVGA
 #(
 	// Parameter Declarations
-	parameter VALUE = 5 //416666   // Value = clk_in/clk_out
+	parameter VALUE = 416666   // Value = clk_in/2*clk_out
 )
 
 (

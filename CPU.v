@@ -16,28 +16,26 @@ module CPU
 	output hSync,
 	output vSync,
 	output sync,
-	output blanck
+	output blanck,
+	output led1,
+	output led2
 );
 
-	localparam rojo = 8'hFF;
-	localparam verd = 8'hFF;
-	localparam azul = 8'hFF;
+	reg [7:0] rojo = 8'hFF;
+	reg [7:0] verd = 8'hFF;
+	reg [7:0] azul = 8'hFF;
 	
 	wire clk_out_VGA;
+	assign led2 = ~led1;
 	
-	// INSTRANCIACIÓN EJECUCIÓN_ALUS
-	Execution alus(
-		.aluOp(),
-		.arrayA(),
-		.arrayB(),
-		.executionResult()
-	);
-
+	// INSTANCIACIÓN EJECUCIÓN_ALUS
+	
+	
 	// INSTANCIACIÓN DIVISOR RELOJ PARA VGA
 	divRelojVGA reloj(
 		.clk_in(clk),
 		.reset(reset),
-		.clk_out(clk_out_VGA)
+		.clk_out(led1)
 	);
 
 
@@ -54,8 +52,7 @@ module CPU
 		.oVGA_V_SYNC(vSync),
 		.oVGA_SYNC(sync),
 		.oVGA_BLANK(blanck),
-		.iCLK(clk_out_VGA),
-		.iRST_N(reset),
-		.iZOOM_MODE_SW());
+		.iCLK(clk),
+		.iRST_N(reset));
 
 endmodule
