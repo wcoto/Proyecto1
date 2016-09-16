@@ -1,12 +1,13 @@
 module divRelojVGA
 #(
 	// Parameter Declarations
-	parameter VALUE = 416666
+	parameter VALUE = 5 //416666   // Value = clk_in/clk_out
 )
 
 (
 	// Input Ports
 	input clk_in,
+	input reset,
 
 	// Output Ports
 	output clk_out
@@ -16,9 +17,11 @@ module divRelojVGA
 
 	reg [BITS_SIZE-1:0] divCounter = 0;
 	
-	always@(posedge clk_in)
+	always@(posedge clk_in or posedge reset)
 		begin
-			if(divCounter == (VALUE - 1))
+			if(reset)
+				divCounter <= 0;
+			else if(divCounter == (VALUE - 1))
 				divCounter <= 0;
 			else
 				divCounter <= divCounter + 1;

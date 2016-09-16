@@ -19,11 +19,33 @@ module CPU
 	output blanck
 );
 
+	localparam rojo = 8'hFF;
+	localparam verd = 8'hFF;
+	localparam azul = 8'hFF;
+	
+	wire clk_out_VGA;
+	
+	// INSTRANCIACIÓN EJECUCIÓN_ALUS
+	Execution alus(
+		.aluOp(),
+		.arrayA(),
+		.arrayB(),
+		.executionResult()
+	);
 
+	// INSTANCIACIÓN DIVISOR RELOJ PARA VGA
+	divRelojVGA reloj(
+		.clk_in(clk),
+		.reset(reset),
+		.clk_out(clk_out_VGA)
+	);
+
+
+	// INSTANCIACIÓN CONTROLADOR VGA
 	VGA_Controller vga(
-		.iRed(),
-		.iGreen(),
-		.iBlue(),
+		.iRed(rojo),
+		.iGreen(verd),
+		.iBlue(azul),
 		.oRequest(),
 		.oVGA_R(vgaRed),
 		.oVGA_G(vgaGreen),
@@ -32,7 +54,7 @@ module CPU
 		.oVGA_V_SYNC(vSync),
 		.oVGA_SYNC(sync),
 		.oVGA_BLANK(blanck),
-		.iCLK(clk),
+		.iCLK(clk_out_VGA),
 		.iRST_N(reset),
 		.iZOOM_MODE_SW());
 
