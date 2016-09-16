@@ -1,11 +1,11 @@
 import re
 
-def patron():
-    line = "ROTRV V5 V9 R15"
+def patron(instruccion):
+    #line = "ROTRV V5 V9 R15"
     registros = "([0-9]?[0-5]?[A-F]*)"
     operandos = " ?((V|R|#)"+registros+")?"
     regex = r"([A-Z]+)" + operandos + operandos + operandos
-    matchObj = re.match(regex, line)
+    matchObj = re.match(regex, instruccion)
 
     if (matchObj):
         function = matchObj.group(1)
@@ -111,6 +111,18 @@ def obtenerOpCode(function):
                "ROTRV" : "10001"}
     return options[function]
     
-    
+def abrirArchivo():
+    archivoEnsamblador = open('Codigo.txt', 'r')
+    archivoBinario     = open('iMem.txt', 'w')
+    linea = archivoEnsamblador.readline()
+    while linea != "":
+        linea = archivoEnsamblador.readline()
+        if(linea == "fin"):
+            break
+        binario = patron(linea) + "\n"
+        archivoBinario.write(binario)
+            
+    archivoEnsamblador.close()
+    archivoBinario.close()       
 
-print(patron())
+abrirArchivo()
