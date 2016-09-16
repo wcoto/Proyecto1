@@ -5,7 +5,6 @@ parameter  BIT_NUMBER=32,
 )(
 input clk,
 input reset,
-input enable,
 input write_enable,
 input [ADDR_NUMBER-1:0] src_addr_1,
 input [ADDR_NUMBER-1:0] src_addr_2,
@@ -22,7 +21,7 @@ integer i;
 //********* Reset RegisterFile or Write data at clock's negative edge *********************//
 
 
-always @(negedge clk && enable)
+always @(negedge clk)
 	begin
 		if (reset)
 			begin
@@ -40,7 +39,7 @@ always @(negedge clk && enable)
 		
 ////*********** Reads data at clock's positive edge **************
 
-always @(posedge clk && enable && !write_enable)
+always @(posedge clk)
 	  begin
 			data_out_1 = ScalarRegisterFile[src_addr_1];
 			data_out_2 = ScalarRegisterFile[src_addr_2];
