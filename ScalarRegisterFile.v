@@ -5,7 +5,6 @@ parameter  BIT_NUMBER=32,
 )(
 input clk,
 input reset,
-input enable,
 input write_enable,
 input [ADDR_NUMBER-1:0] src_addr_1,
 input [ADDR_NUMBER-1:0] src_addr_2,
